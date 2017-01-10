@@ -15,9 +15,9 @@ end
 
 str = fgets(fid);
 [a,str] = strtok(str); 
-nvert = str2num(a)
+nvert = str2num(a);
 [a,str] = strtok(str);
-nface = str2num(a)
+nface = str2num(a);
 
 vertex = zeros(nvert,3);
 face = zeros(nface,3);

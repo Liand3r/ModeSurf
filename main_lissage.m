@@ -1,5 +1,5 @@
 clearvars;
-%filename = 'Data/bear.off';
+
 %-------- Paramètres ---------------
 sigma_c = 1;
 sigma_s = 1;
@@ -13,8 +13,8 @@ ro = 2 * sigma_c;
 %-------- Beginning -----------------
 %Récupération du nom du fichier 
 prompt = 'Nom du fichier = ';
-%str = input(prompt, 's');
-str = 'bear.off'
+str = input(prompt, 's');
+%str = 'bear.off'
 filename = strcat(path, str);
 
 %Lecture du fichier
@@ -25,4 +25,7 @@ filename = strcat(path, str);
       vertices = bilateral_mesh_denoising( vertices, faces, sigma_c_2,sigma_s_2,ro);
   end
  
- write_off('../base_projets/Data/bear_denoised.off',vertices,faces);
+  %récupération nom fichier 
+  prompt = 'Nom du fichier de sortie ? ';
+  strout = input(prompt, 's');
+  write_off(strout,vertices,faces);
