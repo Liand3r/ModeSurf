@@ -1,35 +1,26 @@
-function [ normal] = compute_normal( k,vertices,faces )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function [ normals] = compute_normal(vertices,faces )
 
 nb_faces = length(faces);
-triangles = [];
+nb_vertices = length(vertices);
+normals = zeros(nb_vertices,3);
 
-%calcul des triangles adjacents � vertices(k,:)
-for j=1:nb_faces
-    if((faces(j,1) == k)
-        Point1 = vertices(k,:);
-        Point2 = vertices(faces(j,2),:);
-        Point3 = vertices(faces(j,3),:);
-    end
-    if((faces(j,2) == k)
-        Point1 = vertices(k,:);
-        Point2 = vertices(faces(j,3),:);
-        Point3 = vertices(faces(j,1),:);
-    end
-    if((faces(j,3) == k)
-        Point1 = vertices(k,:);
-        Point2 = vertices(faces(j,1),:);
-        Point3 = vertices(faces(j,2),:);
-    end
-    triangles = [triangles [Point1 Point2 Point3]];
-end
-
-%Calcul de la normal
-nb_triangles = length(triangles);
-for i=1:nb_triangles
+for k=1:nb_faces
+    point_1 = vertices(faces(k,1) + 1,:);
+    point_2 = vertices(faces(k,2) + 1,:);
+    point_3 = vertices(faces(k,3) + 1,:);
     
+    normal_triangle = cross(point_2 - point_1,point_3 - point_1);
+    normals(faces(k,1) + 1,:) = normals(faces(k,3) + 1,:) + normal_triangle;
+    normals(faces(k,2) + 1,:) = normals(faces(k,2) + 1,:) + normal_triangle;
+    normals(faces(k,3) + 1,:) = normals(faces(k,3) + 1,:) + normal_triangle;
 end
+for k=1:nb_vertices
+    n = norm(normals(k));
+    if n > 0
+        normals(k) = normals(k)/n;
+    end
+end
+
 
 end
 
