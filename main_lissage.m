@@ -25,4 +25,4 @@ filename = strcat(path, str);
       vertices = bilateral_mesh_denoising( vertices, faces, sigma_c_2,sigma_s_2,ro);
   end
  
- write_off('../Data/bear_denoised.off',vertices,faces);
+ write_off('../base_projets/Data/bear_denoised.off',vertices,faces);

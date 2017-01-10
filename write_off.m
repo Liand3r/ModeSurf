@@ -9,19 +9,19 @@ fid = fopen(filename, 'w');
 
 nv = size(vertices, 1);
 nf = size(faces, 1);
-ne = 1;
 
 % Ecriture de l'en-tête
-fprintf(fid, '%d %d %d \n', nv, nf, ne);
+fprintf(fid, 'OFF\n');
+fprintf(fid, '%d %d 0\n', nv, nf);
 
 % Ecriture de la liste
 
 for i = 1:nv
-    fprintf(fid, '%f %f %f \n', vertices(i,1), vertices(i,2), vertices(i,3));
+    fprintf(fid, '%f %f %f\n', vertices(i,1), vertices(i,2), vertices(i,3));
 end
 
 for i = 1:nf
-    fprintf(fid, '4 %d %d %d \n', faces(i,1), faces(i,2), faces(i,3));
+    fprintf(fid, '3 %d %d %d\n', faces(i,1), faces(i,2), faces(i,3));
 end
     
 end
