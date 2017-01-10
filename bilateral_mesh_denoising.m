@@ -6,7 +6,7 @@ function [ vertices_denoised ] = bilateral_mesh_denoising( vertices,faces,sigma_
 
 
 %   Detailed explanation goes here
-nb_vertices = length(vertices);
+nb_vertices = size(vertices, 1);
 
 
 vertices_denoised = zeros(nb_vertices,3);
@@ -16,7 +16,7 @@ for k=1:nb_vertices
     % A voire comment faire
     %Poser question TP 16/01
     %normal = compute_normal(k,vertices,faces);
-    normal = [1 1 1]
+    normal = [1 1 1];
     vertices_denoised(k,:) = denoisePoint( k, normal, vertices,sigma_c_2, sigma_s_2,neighborhood);
 end
 

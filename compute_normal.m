@@ -1,11 +1,11 @@
-function [ normal] = Untitled( k,vertices,faces )
+function [ normal] = compute_normal( k,vertices,faces )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
 nb_faces = length(faces);
 triangles = [];
 
-%calcul des triangles adjacents à vertices(k,:)
+%calcul des triangles adjacents ï¿½ vertices(k,:)
 for j=1:nb_faces
     if((faces(j,1) == k)
         Point1 = vertices(k,:);
@@ -22,11 +22,11 @@ for j=1:nb_faces
         Point2 = vertices(faces(j,1),:);
         Point3 = vertices(faces(j,2),:);
     end
-    triangles = [traingles [Point1 Point2 Point3]];
+    triangles = [triangles [Point1 Point2 Point3]];
 end
 
 %Calcul de la normal
-nb_triangle = length(triangles);
+nb_triangles = length(triangles);
 for i=1:nb_triangles
     
 end
