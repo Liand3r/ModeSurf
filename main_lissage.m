@@ -8,8 +8,7 @@ sigma_s_2 = 1;
 ro = 1;
 nb_iter = 1;
 
-%scatter3(vertices(:,1),vertices(:,2),vertices(:,3))
-meshgrid(vertices(:,1),vertices(:,2),vertices(:,3))
+
 
 %  for i=1:nb_iter
 %      vertices = bilateral_mesh_denoising( vertices, faces, sigma_c_2,sigma_s_2,ro);
