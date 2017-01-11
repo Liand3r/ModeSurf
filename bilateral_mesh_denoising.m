@@ -8,8 +8,6 @@ vertices_denoised = zeros(size(vertices, 1),3);
 %---fast neighborhood computing
 HT = repartition(vertices, 2*sqrt(sigma_c_2));
 
-
-vertices_denoised = zeros(nb_vertices,3);
 for k=1:size(vertices, 1)
     
     %---Naive neighborhood computing
