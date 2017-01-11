@@ -13,7 +13,7 @@ end
 if(normalizer ~= 0)
     v_denoised = vertices(index_v_noise,:) + normal * (sum/normalizer);
 else
-    v_denoised = vertices(index_v_noise,:)
+    v_denoised = vertices(index_v_noise,:);
 end
 end
 
