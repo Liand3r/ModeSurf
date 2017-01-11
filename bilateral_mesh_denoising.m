@@ -14,8 +14,6 @@ normals = compute_normal(vertices,faces);
 vertices_denoised = zeros(nb_vertices,3);
 for k=1:nb_vertices
     neighborhood = compute_neighborhood(vertices,k,ro);
-    
-    % A voire comment faire
     vertices_denoised(k,:) = denoisePoint( k, normals(k,:), vertices, sigma_c_2, sigma_s_2, neighborhood);
 end
 

@@ -1,5 +1,5 @@
 function [ v_denoised] = denoisePoint( index_v_noise, normal, vertices,sigma_c_2, sigma_s_2,neighborhood)
-k = length(neighborhood);
+k = size(neighborhood,1);
 sum = 0;
 normalizer = 0;
 for i=1:k
@@ -10,6 +10,10 @@ for i=1:k
     sum = sum + w_c * w_s * h;
     normalizer = normalizer + w_c * w_s;
 end
-v_denoised = vertices(index_v_noise,:) + normal * (sum/normalizer);
+if(normalizer ~= 0)
+    v_denoised = vertices(index_v_noise,:) + normal * (sum/normalizer);
+else
+    v_denoised = vertices(index_v_noise,:)
+end
 end
 
