@@ -10,9 +10,11 @@ for k=1:nb_vertices
         if norm(vertices(index_vertex_to_denoise,:)-vertices(k,:)) < ro
           neighborhood = [[neighborhood ], [vertices(k,:)]];
           nb_voisin = nb_voisin + 1;
+          k
         end  
     end
 end
+
 if (nb_voisin ~= 0)
     n = zeros(nb_voisin,3);
         for i = 1:nb_voisin

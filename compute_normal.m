@@ -19,11 +19,9 @@ for k=1:nb_faces
     normals(faces(k,3) + 1,:) = normals(faces(k,3) + 1,:) + normal_triangle;
 end
 for k=1:nb_vertices
-    norme = norm(normals(k));
-    if norme > 1
-        
-        normals(k) = normals(k)/norme;
-        
+    norme = norm(normals(k,:));
+    if norme > 0.0    
+        normals(k) = normals(k)/norme;      
     end
 end
 

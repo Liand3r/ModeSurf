@@ -5,17 +5,17 @@ filename = input('Nom du fichier en entrée : ', 's');
 %____________Initialisation___________________
 %Lecture du fichier
 [vertices, faces] = read_off(filename);
+
+
+  for i=1:1
 [ minX, minY, minZ, maxX, maxY, maxZ ] = bornesvertices( vertices );
 %-------- Paramètres ---------------
-sigma_c = 0.1*(maxX + maxY + maxZ - minX - minY - minZ);
-sigma_s = 2*sigma_c;
+sigma_c = 0.1*abs(maxX + maxY + maxZ - minX - minY - minZ);
+sigma_s = sigma_c;
 nb_iter = 5;
 %-------- Constantes ----------------
-sigma_c_2 = sigma_c * sigma_c;
-sigma_s_2 = sigma_s * sigma_s;
-ro = 2 * sigma_c;
 
-  for i=1:2
+ro = 2 * sigma_c;
       vertices = bilateral_mesh_denoising( vertices, faces, sigma_c,sigma_s,ro);
   end
  

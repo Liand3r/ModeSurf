@@ -49,18 +49,20 @@ for a=1:length(lx)
     end
 end
 
+
 %On détermine ceux qui sont effectivement à une distance d < rayon de
 %vertices[idV]
 neighborhood = [];
 for i = 1:length(voisins_potentiels)
-    if i ~= idV
-        if norm(vertices(idV,:)-vertices(i,:)) < rayon
-            neighborhood = [[neighborhood ], [vertices(i,:)]];
+    index = voisins_potentiels(i);
+    if index ~= idV
+        if norm(vertices(idV,:)-vertices(index,:)) < rayon
+            neighborhood = [[neighborhood ], vertices(index, :)];
         end
     end
 end
     
-if (length(neighborhood) ~= 0)
+if (length(neighborhood) > 0)
     n = zeros(length(neighborhood)/3,3);
         for i = 1:size(n,1)
         n(i,1) = neighborhood( 3 * (i-1) + 1);
@@ -68,6 +70,8 @@ if (length(neighborhood) ~= 0)
         n(i,3) = neighborhood( 3 * (i-1) + 3);
         end
     neighborhood = n;
+else
+    neighborhood = [];
 end
 end
 
