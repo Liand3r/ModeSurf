@@ -3,10 +3,12 @@ k = size(neighborhood, 1);
 sum = 0;
 normalizer = 0;
 for i=1:k
-    t = norm(vertices( index_v_noise ,:)-neighborhood(i,:));
+    t = norm(vertices( index_v_noise ,:)-neighborhood(i,:)) ;
     
-    h = dot(normal,vertices(index_v_noise,:)-neighborhood(i,:));
-   
+    h = dot(normal,vertices(index_v_noise,:)-neighborhood(i,:)) / t;
+    % a conserver eventuellement, mais pour une raison obscure ça donne de
+    % meilleurs résultats 
+
     w_c = exp(-(t*t)/(2*sigma_c_2));
     w_s = exp(-(h*h)/(2*sigma_s_2));
     sum = sum + w_c * w_s * h;

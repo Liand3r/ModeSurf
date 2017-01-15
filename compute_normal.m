@@ -11,7 +11,7 @@ for k=1:nb_faces
     p3 = vertices(faces(k,3) + 1,:);
     
     %on calcule le vecteur normal à la face
-    normal_triangle = cross(p2-p1,p3-p2);
+    normal_triangle = cross(p2-p1,p3-p1);
     
     %on corrige les normales en ajoutant la nouvelle normale
     normals(faces(k,1) + 1,:) = normals(faces(k,1) + 1,:) + normal_triangle;
