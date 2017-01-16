@@ -6,9 +6,11 @@ function [ vertices_denoised ] = bilateral_mesh_denoising( vertices,faces,sigma_
 normals = compute_normal(vertices,faces);
 vertices_denoised = zeros(size(vertices, 1),3);
 %---fast neighborhood computing
+disp('Calcul de HT')
 HT = repartition(vertices, ro);
 sigc2 = sigma_c * sigma_c;
 sigs2 = sigma_s * sigma_s;
+disp('Mise a jour des vertices')
 for k=1:size(vertices, 1)
     
     %---Naive neighborhood computing

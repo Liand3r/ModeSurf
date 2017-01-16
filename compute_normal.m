@@ -21,7 +21,7 @@ end
 for k=1:nb_vertices
     norme = norm(normals(k,:));
     if norme > 0.0    
-        normals(k) = normals(k)/norme;      
+        normals(k,:) = normals(k,:)/norme;      
     end
 end
 

@@ -1,11 +1,11 @@
 function [ v_denoised] = denoisePoint( index_v_noise, normal, vertices,sigma_c_2, sigma_s_2,neighborhood)
-k = size(neighborhood, 1);
+
 sum = 0;
 normalizer = 0;
-for i=1:k
+for i=1: size(neighborhood, 1)
     t = norm(vertices( index_v_noise ,:)-neighborhood(i,:)) ;
     
-    h = dot(normal,vertices(index_v_noise,:)-neighborhood(i,:)) / t;
+    h = dot(normal,vertices(index_v_noise,:)-neighborhood(i,:)) ;
     % a conserver eventuellement, mais pour une raison obscure ça donne de
     % meilleurs résultats 
 
