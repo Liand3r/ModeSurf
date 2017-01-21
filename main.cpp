@@ -46,7 +46,7 @@ mat4 projection_matrix = perspective(view_angle, WIDTH / HEIGHT, 0.1f, 1000.0f);
 
 void view_control(mat4& view_matrix, float dx);
 
-int main()
+int main(int argc, char* argv[])
 {
 
     cout << "Starting program..." << endl;
@@ -145,9 +145,18 @@ int main()
     //Mesh m("./Data/b_sphere.off");
 
     //Pour utiliser l'algo de lissage, décommenter cette partie
-    Mesh m_noised("./Data/b_sphere.off");
+    //Mesh m_noised("./Data/b_sphere.off");
+    //Mesh m;
+    //m = MeshHE::BillateralMeshDenoising(m_noised);
     Mesh m;
-    m = MeshHE::BillateralMeshDenoising(m_noised);
+    nb_iter = atoi(argv[2]);
+    if (nb_iter== 0) {
+        Mesh m_noised(argv[1]);
+        m = m_noised;
+    }
+        Mesh m_noised(argv[1]);
+    m = MeshHE::BillateralMeshDenoising(m_noised, nb_iter);
+    }
     //------------------------------------------------------
    
 
