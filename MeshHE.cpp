@@ -451,12 +451,12 @@ void MeshHE::ComputeNormals()
 
 
 
-Mesh MeshHE::BillateralMeshDenoising( Mesh &m )
+Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 {
 	MeshHE  m_HE(m);
 	Mesh  m_denoised(m);
 	//m_HE.ComputeNormals();
-	int nb_iter = 10;
+	
 	std::vector<glm::vec3> points_denoised;
 	points_denoised.resize(m.NbVertices());
 	
