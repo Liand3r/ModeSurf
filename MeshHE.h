@@ -130,7 +130,7 @@ class MeshHE : public AbstractMesh
 
     // Geometric utilities
     virtual void ComputeNormals();                      /// Computes new normals for each vertex of this mesh
-    static MeshHE BillateralMeshDenoising(MeshHE &m);
+    static MeshHE BillateralMeshDenoising(MeshHE &m, int nb_iter);
 
 
     // OpenGL utilities
