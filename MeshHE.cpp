@@ -468,10 +468,12 @@ Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 		for(glm::uint i=0; i < m.NbVertices();i++){
 			
 			
-			
+			// point à traité
 			vec3 v = m_denoised.Vertices()[i];
+			//Noraml à ce point
 			vec3 n = m_denoised.Normals()[i];
 			
+			// On va sauvegarder les nouvelles coordonnées des points lissés dans un vecteur
 			vector<Vertex*>  neighbors;
 			neighbors = m_HE.GetVertexNeighbors(m_HE.m_vertices[i]);
 
@@ -491,6 +493,8 @@ Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 			double average_off_set = 0;
 			std::vector<double> off_set_dist;
 			off_set_dist.clear();
+			
+			//calcul du offset mmoyen
 			for(int k = 0; k <  neighbors.size();k++){
 				glm::vec3 vois = *(neighbors[k]->m_position);
 				double t = glm::dot((vois-v),n);
@@ -503,8 +507,9 @@ Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 				average_off_set += t;
 				off_set_dist.push_back(t);
 			}
-
 			average_off_set = average_off_set / (double) neighbors.size();
+			
+			//Calcul du offset 
 			double offset = 0;
 			for(int j = 0; j < (int)off_set_dist.size();j++){
 				offset += (off_set_dist[j]-average_off_set)*(off_set_dist[j]-average_off_set);
@@ -513,6 +518,8 @@ Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 
 			sigmaS = (sqrt(offset) < 1.0e-12) ? (sqrt(offset) + 1.0e-12) : sqrt(offset);
 			
+			
+			//Caclul des nouvelles coodonnées en utilisant du point
 			float sum = 0;
 			float normalizer = 0;	
 			for(glm::uint k = 0; k<neighbors.size(); k++){
@@ -530,7 +537,7 @@ Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 			//points_denoised[i] = v ;
 		}
 
-
+		// On met à jour les coordonnées dans la mesh
 		for(glm::uint l=0; l < m.NbVertices();l++){
 			m_denoised.Vertices()[l] = points_denoised[l];
 			*(m_HE.m_vertices[l]->m_position) = points_denoised[l];
