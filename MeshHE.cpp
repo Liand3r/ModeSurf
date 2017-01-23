@@ -532,9 +532,26 @@ Mesh MeshHE::BillateralMeshDenoising( Mesh &m, int nb_iter )
 				normalizer = normalizer + wc * ws;	
 
 			}
+			if (normalizer > 0.000001) {
+
 			points_denoised[i] = v - n*(sum/normalizer);
+			}
+			else { 
+				points_denoised[i] = vec3(0.0);
+				float coef = 0;
+				for(glm::uint k = 0; k<neighbors.size(); k++){
+					//points_denoised[i] = points_denoised[i] + *(neighbors[k]->m_position);
+					float d = glm::distance(*(neighbors[k]->m_position),points_denoised[i]);
+					points_denoised[i] = points_denoised[i] + (*(neighbors[k]->m_position))*((float)(1.0/(d+1.0)));
+					coef += 1.0/(d+1.0);
+				}
+				//points_denoised[i] = points_denoised[i] / (float) neighbors.size();
+				points_denoised[i] = points_denoised[i] / (float) coef;
+			}
 			//points_denoised[i] = v + n/((float)10000);
 			//points_denoised[i] = v ;
+		}
+
 		}
 
 		// On met à jour les coordonnées dans la mesh
